@@ -20,7 +20,7 @@ class Tooltip:
         self.widget.bind("<Leave>", self.leave)
         self.widget.bind("<ButtonPress>", self.leave)
         self.id: Optional[str] = None
-        self.tw = None
+        self.tw: Optional[tkinter.Toplevel] = None
 
     def enter(self, event: tkinter.Event | None = None) -> None:
         """Handle the event: cursor pointer moves to the tooltip area."""
@@ -43,10 +43,10 @@ class Tooltip:
         if current_id:
             self.widget.after_cancel(current_id)
 
-    def showtip(self, event=None):
+    def showtip(self, event: Optional[tkinter.Event] = None) -> None:
         """Show the tooltip on screen."""
         x = y = 0
-        x, y, _, _ = self.widget.bbox("insert")
+        x, y, _, _ = self.widget.bbox()  # type: ignore [misc]
         x += self.widget.winfo_rootx() + 25
         y += self.widget.winfo_rooty() + 20
         # creates a toplevel window

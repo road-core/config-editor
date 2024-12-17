@@ -2,11 +2,13 @@
 
 import tkinter
 
+from gui.icons import Icons
+
 
 class TLSConfigurationDialog(tkinter.Toplevel):
     """TLS configuration dialog."""
 
-    def __init__(self, parent, icons):
+    def __init__(self, parent: tkinter.Toplevel, icons: Icons) -> None:
         """Initialize TLS configuration dialog."""
         tkinter.Toplevel.__init__(self, parent)
         self.title("TLS configuration")

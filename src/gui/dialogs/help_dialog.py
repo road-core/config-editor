@@ -1,12 +1,13 @@
 """Help dialog implementation."""
 
 import tkinter
+from typing import Optional
 
 
 class HelpDialog(tkinter.Toplevel):
     """Help dialog implementation."""
 
-    def __init__(self, parent):
+    def __init__(self, parent: Optional[tkinter.Toplevel]) -> None:
         """Perform initialization of help dialog."""
         tkinter.Toplevel.__init__(self, parent)
         self.title("Nápověda")
@@ -46,11 +47,11 @@ class HelpDialog(tkinter.Toplevel):
         # close the dialog on 'x' click
         self.protocol("WM_DELETE_WINDOW", self.destroy)
 
-    def ok(self):
+    def ok(self) -> None:
         """Ok button handler."""
         self.destroy()
 
 
-def show_help():
+def show_help() -> None:
     """Display help dialog."""
     HelpDialog(None)

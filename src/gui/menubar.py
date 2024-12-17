@@ -1,6 +1,7 @@
 """Menu bar displayed on the main window."""
 
 import tkinter
+from typing import Any
 
 from gui.dialogs.about_dialog import about
 from gui.dialogs.help_dialog import show_help
@@ -9,7 +10,7 @@ from gui.dialogs.help_dialog import show_help
 class Menubar(tkinter.Menu):
     """Menu bar displayed on the main window."""
 
-    def __init__(self, parent, main_window):
+    def __init__(self, parent: tkinter.Toplevel, main_window: Any) -> None:
         """Initialize the menu bar."""
         super().__init__(tearoff=0)
 

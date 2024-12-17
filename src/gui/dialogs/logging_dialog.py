@@ -3,11 +3,13 @@
 import tkinter
 from tkinter import ttk
 
+from gui.icons import Icons
+
 
 class LoggingDialog(tkinter.Toplevel):
     """Logging dialog."""
 
-    def __init__(self, parent, icons):
+    def __init__(self, parent: tkinter.Toplevel, icons: Icons) -> None:
         """Initialize logging dialog."""
         tkinter.Toplevel.__init__(self, parent)
         self.title("Logging settings")
@@ -24,11 +26,11 @@ class LoggingDialog(tkinter.Toplevel):
         self.grab_set()
 
         # UI groups
-        self.group = tkinter.LabelFrame(self, text="Logging levels", padx=5, pady=8)
+        self.uigroup = tkinter.LabelFrame(self, text="Logging levels", padx=5, pady=8)
 
-        label1 = tkinter.Label(self.group, text="Application")
-        label2 = tkinter.Label(self.group, text="Libraries")
-        label3 = tkinter.Label(self.group, text="Uvicorn")
+        label1 = tkinter.Label(self.uigroup, text="Application")
+        label2 = tkinter.Label(self.uigroup, text="Libraries")
+        label3 = tkinter.Label(self.uigroup, text="Uvicorn")
 
         label1.grid(row=1, column=1, sticky="W", padx=5, pady=5)
         label2.grid(row=2, column=1, sticky="W", padx=5, pady=5)
@@ -37,11 +39,11 @@ class LoggingDialog(tkinter.Toplevel):
         debug_levels = ("Not set", "Debug", "Info", "Warning", "Error", "Critical")
 
         app_log_levels = tkinter.StringVar(
-            self.group, debug_levels[0], "app_log_levels"
+            self.uigroup, debug_levels[0], "app_log_levels"
         )
         print(app_log_levels)
         cb1 = ttk.Combobox(
-            self.group,
+            self.uigroup,
             values=debug_levels,
             # textvariable=app_log_levels,
             state="readonly",
@@ -50,11 +52,11 @@ class LoggingDialog(tkinter.Toplevel):
         cb1.grid(row=1, column=2, sticky="W", padx=5, pady=5)
 
         lib_log_levels = tkinter.StringVar(
-            self.group, debug_levels[0], "lib_log_levels"
+            self.uigroup, debug_levels[0], "lib_log_levels"
         )
         print(lib_log_levels)
         cb2 = ttk.Combobox(
-            self.group,
+            self.uigroup,
             values=debug_levels,
             # textvariable=lib_log_levels,
             state="readonly",
@@ -63,11 +65,11 @@ class LoggingDialog(tkinter.Toplevel):
         cb2.grid(row=2, column=2, sticky="W", padx=5, pady=5)
 
         uvicorn_log_levels = tkinter.StringVar(
-            self.group, debug_levels[0], "uvicorn_log_levels"
+            self.uigroup, debug_levels[0], "uvicorn_log_levels"
         )
         print(uvicorn_log_levels)
         cb3 = ttk.Combobox(
-            self.group,
+            self.uigroup,
             values=debug_levels,
             # textvariable=uvicorn_log_levels,
             state="readonly",
@@ -76,7 +78,7 @@ class LoggingDialog(tkinter.Toplevel):
         cb3.grid(row=3, column=2, sticky="W", padx=5, pady=5)
 
         # UI groups placement
-        self.group.grid(row=1, column=1, sticky="NSWE", padx=5, pady=5)
+        self.uigroup.grid(row=1, column=1, sticky="NSWE", padx=5, pady=5)
 
         ok_button = tkinter.Button(
             self,

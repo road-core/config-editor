@@ -2,6 +2,7 @@
 
 import tkinter
 from tkinter import ttk
+from typing import Optional
 
 from gui.dialogs.auth_dialog import AuthDialog
 from gui.dialogs.cache_dialog import ConversationCacheDialog
@@ -12,6 +13,7 @@ from gui.dialogs.llm_dialog import LLMDialog
 from gui.dialogs.logging_dialog import LoggingDialog
 from gui.dialogs.security_profile_dialog import TLSSecurityProfileDialog
 from gui.dialogs.tls_dialog import TLSConfigurationDialog
+from gui.icons import Icons
 
 BUTTON_WIDTH = 100
 
@@ -19,28 +21,30 @@ BUTTON_WIDTH = 100
 class EditDialog(tkinter.Toplevel):
     """Implementation of configuration editor."""
 
-    def __init__(self, parent, icons):
+    def __init__(self, parent: tkinter.Toplevel, icons: Icons) -> None:
         """Initialize the dialog."""
         tkinter.Toplevel.__init__(self, parent)
         self.title("Configuration editor")
         self.icons = icons
         self.parent = parent
-        self.group1 = None
-        self.group2 = None
-        self.group3 = None
+        self.group1: Optional[tkinter.LabelFrame] = None
+        self.group2: Optional[tkinter.LabelFrame] = None
+        self.group3: Optional[tkinter.LabelFrame] = None
 
         # don't display the dialog in list of opened windows
         self.transient(parent)
         self.add_widgets()
         self.set_dialog_properties()
 
-    def add_widgets(self):
+    def add_widgets(self) -> None:
         """Add all widgets on the dialog."""
         self.add_llm_group()
         self.add_service_settings_group()
         self.add_devel_settings_group()
 
         # UI groups placement
+        if self.group1 is None or self.group2 is None or self.group3 is None:
+            return
         self.group1.grid(row=1, column=1, sticky="NSWE", padx=5, pady=5)
         self.group2.grid(row=1, column=2, sticky="NSWE", padx=5, pady=5)
         self.group3.grid(row=1, column=3, sticky="NSWE", padx=5, pady=5)
@@ -68,7 +72,7 @@ class EditDialog(tkinter.Toplevel):
         # set the focus
         ok_button.focus_set()
 
-    def set_dialog_properties(self):
+    def set_dialog_properties(self) -> None:
         """Set edit dialog properties."""
         # close the dialog on 'x' click
         self.protocol("WM_DELETE_WINDOW", self.destroy)
@@ -80,7 +84,7 @@ class EditDialog(tkinter.Toplevel):
         self.bind("<Return>", lambda _: self.ok())
         self.bind("<Escape>", lambda _: self.destroy())
 
-    def add_llm_group(self):
+    def add_llm_group(self) -> None:
         """Add LLM group widgets onto the dialog."""
         # UI groups
         self.group1 = tkinter.LabelFrame(self, text="LLM section", padx=5, pady=8)
@@ -96,7 +100,7 @@ class EditDialog(tkinter.Toplevel):
         )
         button_new_llm.grid(row=1, column=1, sticky="WE", padx=5, pady=5)
 
-    def add_service_settings_group(self):
+    def add_service_settings_group(self) -> None:
         """Add service settings widgets onto the dialog."""
         self.group2 = tkinter.LabelFrame(self, text="Service settings", padx=5, pady=8)
         # service settings
@@ -199,7 +203,9 @@ class EditDialog(tkinter.Toplevel):
         label9 = tkinter.Label(self.group2, text="Query validation method")
         label9.grid(row=9, column=1, sticky="W", padx=5, pady=5)
         query_validation_methods = ("LLM", "Keyword")
-        query_validation_method = query_validation_methods[0]
+        query_validation_method = tkinter.StringVar(
+            self.group2, query_validation_methods[0], "query_validation_method"
+        )
 
         cb = ttk.Combobox(
             self.group2,
@@ -210,7 +216,7 @@ class EditDialog(tkinter.Toplevel):
         cb.current(0)
         cb.grid(row=9, column=2, sticky="W", padx=5, pady=5)
 
-    def add_devel_settings_group(self):
+    def add_devel_settings_group(self) -> None:
         """Add devel settings widgets onto the dialog."""
         self.group3 = tkinter.LabelFrame(self, text="Devel settings", padx=5, pady=8)
         # devel settings

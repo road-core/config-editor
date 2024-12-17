@@ -2,11 +2,13 @@
 
 import tkinter
 
+from gui.icons import Icons
+
 
 class AuthDialog(tkinter.Toplevel):
     """Dialog for editing authentication configuration."""
 
-    def __init__(self, parent, icons):
+    def __init__(self, parent: tkinter.Toplevel, icons: Icons) -> None:
         """Initialize authentication configuration dialog."""
         tkinter.Toplevel.__init__(self, parent)
         self.title("Authentication configuration")

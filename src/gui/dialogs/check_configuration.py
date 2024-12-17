@@ -2,11 +2,13 @@
 
 import tkinter
 
+from gui.icons import Icons
+
 
 class CheckConfigurationDialog(tkinter.Toplevel):
     """Dialog for checking the configuration."""
 
-    def __init__(self, parent, icons):
+    def __init__(self, parent: tkinter.Toplevel, icons: Icons) -> None:
         """Initialize dialog for checking the configuration."""
         tkinter.Toplevel.__init__(self, parent)
         self.title("Check configuration")

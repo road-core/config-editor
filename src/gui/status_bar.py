@@ -1,6 +1,7 @@
 """Status bar displayed in the main window."""
 
 import tkinter
+from typing import Any
 
 
 class StatusBar(tkinter.Frame):
@@ -12,7 +13,7 @@ class StatusBar(tkinter.Frame):
         self.label = tkinter.Label(self, bd=1, relief=tkinter.SUNKEN, anchor=tkinter.W)
         self.label.pack(fill=tkinter.X)
 
-    def set(self, string_format, *args):
+    def set(self, string_format: str, *args: Any) -> None:
         """Set status bar messages."""
         self.label.config(text=string_format % args)
         self.label.update_idletasks()

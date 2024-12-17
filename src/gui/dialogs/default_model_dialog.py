@@ -2,11 +2,13 @@
 
 import tkinter
 
+from gui.icons import Icons
+
 
 class DefaultModelSelection(tkinter.Toplevel):
     """Default model selection dialog."""
 
-    def __init__(self, parent, icons):
+    def __init__(self, parent: tkinter.Toplevel, icons: Icons) -> None:
         """Initialize default model selection dialog."""
         tkinter.Toplevel.__init__(self, parent)
         self.title("Default model selection")

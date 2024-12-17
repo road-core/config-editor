@@ -2,11 +2,13 @@
 
 import tkinter
 
+from gui.icons import Icons
+
 
 class LLMDialog(tkinter.Toplevel):
     """New LLM dialog."""
 
-    def __init__(self, parent, icons):
+    def __init__(self, parent: tkinter.Toplevel, icons: Icons) -> None:
         """Initialize new LLM dialog."""
         tkinter.Toplevel.__init__(self, parent)
         self.title("New LLM")

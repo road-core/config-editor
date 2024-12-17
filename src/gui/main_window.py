@@ -2,6 +2,7 @@
 
 import tkinter
 from tkinter import filedialog, messagebox
+from typing import Any
 
 from gui.dialogs.edit_dialog import EditDialog
 from gui.icons import Icons
@@ -13,7 +14,7 @@ from gui.toolbar import Toolbar
 class MainWindow:
     """Main window shown on screen."""
 
-    def __init__(self, config_editor):
+    def __init__(self, config_editor: Any) -> None:
         """Initialize main window."""
         self.config_editor = config_editor
         self.root = tkinter.Tk()
@@ -34,11 +35,11 @@ class MainWindow:
         self.root.geometry("480x320")
         # EditDialog(self.root, self.icons)
 
-    def show(self):
+    def show(self) -> None:
         """Display the main window on screen."""
         self.root.mainloop()
 
-    def quit(self):
+    def quit(self) -> None:
         """Display message box whether to quit the application."""
         answer = messagebox.askyesno(
             "Do you want to quit the program?", "Do you want to quit the program?"
@@ -46,12 +47,12 @@ class MainWindow:
         if answer:
             self.root.quit()
 
-    def configure_grid(self):
+    def configure_grid(self) -> None:
         """Configure grid on canvas."""
         tkinter.Grid.rowconfigure(self.root, 2, weight=1)
         tkinter.Grid.columnconfigure(self.root, 2, weight=1)
 
-    def new_configuration(self):
+    def new_configuration(self) -> None:
         """Initialize new configuration."""
         answer = messagebox.askyesno(
             "Clear current configuration?", "Clear current configuration?"
@@ -59,11 +60,11 @@ class MainWindow:
         if answer:
             self.config_editor.new_configuration()
 
-    def load_configuration(self):
+    def load_configuration(self) -> None:
         """Load configuration from YAML file."""
         filetypes = [("YAML files", "*.yaml"), ("YAML files", "*.yaml")]
         dialog = filedialog.Open(self.root, filetypes=filetypes)
-        filename = dialog.show()
+        filename = dialog.show()  # type: ignore [no-untyped-call]
         if filename is not None and filename != "":
             try:
                 self.config_editor.load_configuration(filename)
@@ -72,7 +73,7 @@ class MainWindow:
                 messagebox.showerror("Configuration loading failed", f"Failure {e}")
                 print(e)
 
-    def save_configuration(self):
+    def save_configuration(self) -> None:
         """Save configuration into YAML file."""
         try:
             self.config_editor.save_configuration()
@@ -81,11 +82,11 @@ class MainWindow:
             messagebox.showerror("Configuration saving failed", f"Failure {e}")
             print(e)
 
-    def save_as_configuration(self):
+    def save_as_configuration(self) -> None:
         """Save configuration into specified YAML file."""
         filetypes = [("YAML files", "*.yaml"), ("YAML files", "*.yaml")]
         dialog = filedialog.SaveAs(self.root, filetypes=filetypes)
-        filename = dialog.show()
+        filename = dialog.show()  # type: ignore [no-untyped-call]
         if filename is not None and filename != "":
             try:
                 self.config_editor.save_configuration_as(filename)
@@ -94,11 +95,11 @@ class MainWindow:
                 messagebox.showerror("Configuration saving failed", f"Failure {e}")
                 print(e)
 
-    def edit_configuration(self):
+    def edit_configuration(self) -> None:
         """Edit configuration using the specialized dialog."""
         EditDialog(self.root, self.icons)
 
-    def check_configuration(self):
+    def check_configuration(self) -> None:
         """Check configuration."""
         result = self.config_editor.check_configuration()
         print(result)

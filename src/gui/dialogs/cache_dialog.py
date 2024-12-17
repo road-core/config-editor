@@ -3,11 +3,13 @@
 import tkinter
 from tkinter import ttk
 
+from gui.icons import Icons
+
 
 class ConversationCacheDialog(tkinter.Toplevel):
     """Dialog for editing conversation settings."""
 
-    def __init__(self, parent, icons):
+    def __init__(self, parent: tkinter.Toplevel, icons: Icons) -> None:
         """Initialize dialog for editing conversation settings."""
         tkinter.Toplevel.__init__(self, parent)
         self.title("Conversation cache")
@@ -24,19 +26,21 @@ class ConversationCacheDialog(tkinter.Toplevel):
         self.grab_set()
 
         # UI groups
-        self.group = tkinter.LabelFrame(self, text="Conversation cache", padx=5, pady=8)
+        self.uigroup = tkinter.LabelFrame(
+            self, text="Conversation cache", padx=5, pady=8
+        )
 
-        label1 = tkinter.Label(self.group, text="Type")
+        label1 = tkinter.Label(self.uigroup, text="Type")
 
         label1.grid(row=1, column=1, sticky="W", padx=5, pady=5)
 
         cache_types = ("In-memory", "PostgreSQL", "Redis")
 
-        cache_type = tkinter.StringVar(self.group, cache_types[0], "cache_type")
+        cache_type = tkinter.StringVar(self.uigroup, cache_types[0], "cache_type")
         print(cache_type)
 
         cb1 = ttk.Combobox(
-            self.group,
+            self.uigroup,
             values=cache_types,
             # textvariable=app_log_levels,
             state="readonly",
@@ -54,7 +58,7 @@ class ConversationCacheDialog(tkinter.Toplevel):
         )
 
         # UI groups placement
-        self.group.grid(row=1, column=1, sticky="NSWE", padx=5, pady=5)
+        self.uigroup.grid(row=1, column=1, sticky="NSWE", padx=5, pady=5)
 
         ok_button.grid(row=2, column=1, sticky="W", padx=10, pady=10)
 

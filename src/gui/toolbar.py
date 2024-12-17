@@ -8,7 +8,7 @@ from gui.tooltip import Tooltip
 class Toolbar(tkinter.LabelFrame):
     """Toolbar displayed on the main window."""
 
-    def __init__(self, parent: tkinter.Tk, main_window) -> None:
+    def __init__(self, parent: tkinter.Tk, main_window) -> None:  # type: ignore [no-untyped-def]
         """Initialize the toolbar."""
         super().__init__(parent, text="Tools", padx=5, pady=5)
 
@@ -99,7 +99,7 @@ class Toolbar(tkinter.LabelFrame):
         self.button_quit.grid(column=10, row=1)
 
     @staticmethod
-    def disable_button(button):
+    def disable_button(button: tkinter.Button) -> None:
         """Disable specified button on toolbar."""
         button["state"] = "disabled"
 
