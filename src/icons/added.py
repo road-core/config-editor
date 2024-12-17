@@ -1,0 +1,18 @@
+"""Icon for the following action: add/added operation."""
+
+# This icon was converted from the Oxygen Icon Theme
+# Please see copyright for further informations
+
+icon = """
+iVBORw0KGgoAAAANSUhEUgAAABYAAAAWCAMAAADzapwJAAAAAXNSR0IArs4c6QAAAAlwSFlzAAAN
+1wAADdcBQiibeAAAAAd0SU1FB9kMBhQDEUPMLQcAAADJUExURQAAACUlAAAAAA4sAg4tAxEtBxEt
+Bv////f5+Pv0//z1//33///4///7///9//////31//72//74///5///7///9///+/////+3t7e3u
+7e7t7u7u7e7u7u7v7v///////0htAE53AFF6AFqDABtDAClOAClPACpOACtRADFYADNZADhhADpp
+AD5nAEl0AEl7AEp3AEt3AEx5AE98AFaEAFeGAFmJAFmKAFqJAFuMAF6QAGCYAGKVAGWXAGmcAGyg
+AHSqAHSwAHqxALw/+HEAAAAkdFJOUwAACzc3R0iorKysrKysrKytra2tra2trbKysrKyssLD/v7+
+/qM1hPYAAAABYktHRAcWYYjrAAAAyElEQVR42o2R5w6CMBRG2bigKqOiQB1UxL0Vt77/Q1kqCkRM
+POmPm5O29+a7DMMyX7DR4XhRSiHyXOS5AnIzoAJHXgjIjrAcAByLlkggWnRtCvA88KpckWgp1tD3
+YayltMb4L00bNSAewAZtHmsHQIIcjGTTMEz1fRt4Psb9YbsznS+Xi7Ga1sGk21tvw3A3U7KfrPay
+TlCyLfXNSaOVlRlQP1zrOXNr51stT18e1Y9Ooqoc78VPVEmwdrnUbCXB5q8hf2k/VvwE0OgmkNbJ
+VWUAAAAASUVORK5CYII=
+"""
