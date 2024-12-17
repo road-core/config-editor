@@ -1,0 +1,20 @@
+name: Type checks
+
+on:
+  - push
+  - pull_request
+
+jobs:
+  mypy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Python version
+        run: python --version
+      - name: Mypy install
+        run: pip install --user mypy pydantic
+      - name: Type checks
+        run: mypy --explicit-package-bases --disallow-untyped-calls --disallow-untyped-defs --disallow-incomplete-defs --ignore-missing-imports --disable-error-code attr-defined ols/
