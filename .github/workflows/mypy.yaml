@@ -17,4 +17,4 @@ jobs:
       - name: Mypy install
         run: pip install --user mypy pydantic
       - name: Type checks
-        run: mypy --explicit-package-bases --disallow-untyped-calls --disallow-untyped-defs --disallow-incomplete-defs --ignore-missing-imports --disable-error-code attr-defined ols/
+        run: mypy --explicit-package-bases --disallow-untyped-calls --disallow-untyped-defs --disallow-incomplete-defs --ignore-missing-imports --disable-error-code attr-defined src/
