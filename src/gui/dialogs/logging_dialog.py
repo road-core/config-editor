@@ -1,7 +1,7 @@
 """Logging dialog."""
 
 import tkinter
-import tkinter.ttk as ttk
+from tkinter import ttk
 
 
 class LoggingDialog(tkinter.Toplevel):

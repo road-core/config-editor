@@ -1,7 +1,7 @@
 """Conversation cache dialog."""
 
 import tkinter
-import tkinter.ttk as ttk
+from tkinter import ttk
 
 
 class ConversationCacheDialog(tkinter.Toplevel):

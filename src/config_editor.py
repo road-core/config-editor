@@ -13,6 +13,7 @@ class ConfigEditor:
     def __init__(self):
         """Initialize configuration editor."""
         self.configuration = None
+        self.filename = None
 
     def new_configuration(self):
         """Create new configuration to be edited."""
@@ -20,23 +21,22 @@ class ConfigEditor:
 
     def load_configuration(self, filename):
         """Load configuration from YAML file."""
-        with open(filename) as fin:
+        with open(filename, encoding="utf-8") as fin:
             self.configuration = yaml.safe_load(fin)
             self.filename = filename
 
     def save_configuration_as(self, filename):
         """Store configuration into YAML file."""
-        with open(filename, "w") as fout:
+        with open(filename, "w", encoding="utf-8") as fout:
             yaml.dump(self.configuration, fout)
 
     def save_configuration(self):
         """Store configuration into YAML file."""
-        with open(self.filename, "w") as fout:
+        with open(self.filename, "w", encoding="utf-8") as fout:
             yaml.dump(self.configuration, fout)
 
     def check_configuration(self):
         """Check if configuration is correct one."""
-        pass
 
 
 config_editor = ConfigEditor()

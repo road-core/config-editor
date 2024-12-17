@@ -1,7 +1,7 @@
 """Implementation of configuration editor."""
 
 import tkinter
-import tkinter.ttk as ttk
+from tkinter import ttk
 
 from gui.dialogs.auth_dialog import AuthDialog
 from gui.dialogs.cache_dialog import ConversationCacheDialog
@@ -25,14 +25,65 @@ class EditDialog(tkinter.Toplevel):
         self.title("Configuration editor")
         self.icons = icons
         self.parent = parent
+        self.group1 = None
+        self.group2 = None
+        self.group3 = None
 
         # don't display the dialog in list of opened windows
         self.transient(parent)
+        self.add_widgets()
+        self.set_dialog_properties()
 
+    def add_widgets(self):
+        """Add all widgets on the dialog."""
+        self.add_llm_group()
+        self.add_service_settings_group()
+        self.add_devel_settings_group()
+
+        # UI groups placement
+        self.group1.grid(row=1, column=1, sticky="NSWE", padx=5, pady=5)
+        self.group2.grid(row=1, column=2, sticky="NSWE", padx=5, pady=5)
+        self.group3.grid(row=1, column=3, sticky="NSWE", padx=5, pady=5)
+
+        # rest
+        ok_button = tkinter.Button(
+            self,
+            text="OK",
+            command=self.ok,
+            compound="left",
+            image=self.icons.checkbox_icon,
+            width=200,
+        )
+        ok_button.grid(row=2, column=1, sticky="W", padx=10, pady=10)
+
+        cancel_button = tkinter.Button(
+            self,
+            text="Cancel",
+            command=self.cancel,
+            compound="left",
+            image=self.icons.exit_icon,
+            width=200,
+        )
+        cancel_button.grid(row=2, column=2, sticky="W", padx=10, pady=10)
+        # set the focus
+        ok_button.focus_set()
+
+    def set_dialog_properties(self):
+        """Set edit dialog properties."""
+        # close the dialog on 'x' click
+        self.protocol("WM_DELETE_WINDOW", self.destroy)
+
+        # get the focus
+        self.grab_set()
+
+        # how the buttons should behave
+        self.bind("<Return>", lambda _: self.ok())
+        self.bind("<Escape>", lambda _: self.destroy())
+
+    def add_llm_group(self):
+        """Add LLM group widgets onto the dialog."""
         # UI groups
         self.group1 = tkinter.LabelFrame(self, text="LLM section", padx=5, pady=8)
-        self.group2 = tkinter.LabelFrame(self, text="Service settings", padx=5, pady=8)
-        self.group3 = tkinter.LabelFrame(self, text="Devel settings", padx=5, pady=8)
 
         # LLM settings
         button_new_llm = tkinter.Button(
@@ -45,6 +96,9 @@ class EditDialog(tkinter.Toplevel):
         )
         button_new_llm.grid(row=1, column=1, sticky="WE", padx=5, pady=5)
 
+    def add_service_settings_group(self):
+        """Add service settings widgets onto the dialog."""
+        self.group2 = tkinter.LabelFrame(self, text="Service settings", padx=5, pady=8)
         # service settings
         label1 = tkinter.Label(self.group2, text="Authentication")
         label1.grid(row=1, column=1, sticky="W", padx=5, pady=5)
@@ -156,6 +210,9 @@ class EditDialog(tkinter.Toplevel):
         cb.current(0)
         cb.grid(row=9, column=2, sticky="W", padx=5, pady=5)
 
+    def add_devel_settings_group(self):
+        """Add devel settings widgets onto the dialog."""
+        self.group3 = tkinter.LabelFrame(self, text="Devel settings", padx=5, pady=8)
         # devel settings
         cb1 = tkinter.Checkbutton(
             self.group3, text="Authentication"
@@ -169,45 +226,6 @@ class EditDialog(tkinter.Toplevel):
             self.group3, text="Dev UI enabled"
         )  # , variable=var1, onvalue=1, offvalue=0)
         cb3.grid(row=3, column=1, sticky="W", padx=5, pady=5)
-
-        # UI groups placement
-        self.group1.grid(row=1, column=1, sticky="NSWE", padx=5, pady=5)
-        self.group2.grid(row=1, column=2, sticky="NSWE", padx=5, pady=5)
-        self.group3.grid(row=1, column=3, sticky="NSWE", padx=5, pady=5)
-
-        # rest
-        ok_button = tkinter.Button(
-            self,
-            text="OK",
-            command=self.ok,
-            compound="left",
-            image=self.icons.checkbox_icon,
-            width=200,
-        )
-        ok_button.grid(row=2, column=1, sticky="W", padx=10, pady=10)
-
-        cancel_button = tkinter.Button(
-            self,
-            text="Cancel",
-            command=self.cancel,
-            compound="left",
-            image=self.icons.exit_icon,
-            width=200,
-        )
-        cancel_button.grid(row=2, column=2, sticky="W", padx=10, pady=10)
-
-        # close the dialog on 'x' click
-        self.protocol("WM_DELETE_WINDOW", self.destroy)
-
-        # get the focus
-        self.grab_set()
-
-        # how the buttons should behave
-        self.bind("<Return>", lambda _: self.ok())
-        self.bind("<Escape>", lambda _: self.destroy())
-
-        # set the focus
-        ok_button.focus_set()
 
     def ok(self) -> None:
         """Handle Ok button press."""
