@@ -10,7 +10,7 @@ class HelpDialog(tkinter.Toplevel):
     def __init__(self, parent: Optional[tkinter.Toplevel]) -> None:
         """Perform initialization of help dialog."""
         tkinter.Toplevel.__init__(self, parent)
-        self.title("Nápověda")
+        self.title("Help")
         self.transient(parent)
 
         self.grab_set()
