@@ -7,7 +7,12 @@ from typing import Optional
 class HelpDialog(tkinter.Toplevel):
     """Help dialog implementation."""
 
-    def __init__(self, parent: Optional[tkinter.Toplevel]) -> None:
+    def __init__(
+        self,
+        parent: Optional[tkinter.Toplevel],
+        title: Optional[str] = "Help",
+        help_text: list[tuple[str, Optional[str]]] = [],
+    ) -> None:
         """Perform initialization of help dialog."""
         tkinter.Toplevel.__init__(self, parent)
         self.title("Help")
@@ -15,24 +20,31 @@ class HelpDialog(tkinter.Toplevel):
 
         self.grab_set()
 
-        f = tkinter.LabelFrame(self, text="x")
+        f = tkinter.LabelFrame(self, text=title)
 
         scrollbar = tkinter.Scrollbar(f)
-        text = tkinter.Text(f, height=5, width=60)
+        text = tkinter.Text(f, height=30, width=80)
 
         scrollbar.pack(side=tkinter.RIGHT, fill=tkinter.Y)
         text.pack(side=tkinter.LEFT, fill=tkinter.BOTH, expand=1)
         scrollbar.config(command=text.yview)
         text.config(yscrollcommand=scrollbar.set)
 
-        text.tag_configure("h1", font=("Arial", 20, "bold"))
-        text.tag_configure("h2", font=("Arial", 16, "bold"))
+        # define new tags that can be used in help text
+        text.tag_configure("<h1>", font=("Arial", 20, "bold"))
+        text.tag_configure("<h2>", font=("Arial", 16, "bold"))
 
-        text.insert(tkinter.END, "Help\n", "h1")
-        text.insert(tkinter.END, "Config editor\n", "h2")
+        for t in help_text:
+            if len(t) == 2:
+                text.insert(tkinter.END, t[1] + "\n", t[0])
+            else:
+                text.insert(tkinter.END, t[0] + "\n")
 
-        help_message = """"""
-        text.insert(tkinter.END, help_message)
+        # text.insert(tkinter.END, "Help\n", "<h1>")
+        # text.insert(tkinter.END, "Config editor\n", "<h2>")
+
+        # help_message = "****"
+        # text.insert(tkinter.END, help_message)
 
         text.config(state=tkinter.DISABLED)
         f.grid(row=0, column=0, sticky="NWSE")
@@ -54,4 +66,9 @@ class HelpDialog(tkinter.Toplevel):
 
 def show_help() -> None:
     """Display help dialog."""
-    HelpDialog(None)
+    help_text = [
+        ("<h1>", "Road core service configuration editor"),
+        ("<h2>", "Main help"),
+        ("help text",),
+    ]
+    HelpDialog(None, help_text=help_text)
