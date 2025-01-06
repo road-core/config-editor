@@ -10,7 +10,7 @@ class HelpDialog(tkinter.Toplevel):
     def __init__(
         self,
         parent: Optional[tkinter.Toplevel],
-        title: Optional[str] = "Help",
+        title: str = "Help",
         help_text: list[tuple[str, Optional[str]]] = [],
     ) -> None:
         """Perform initialization of help dialog."""
@@ -36,7 +36,8 @@ class HelpDialog(tkinter.Toplevel):
 
         for t in help_text:
             if len(t) == 2:
-                text.insert(tkinter.END, t[1] + "\n", t[0])
+                if t[1] is not None: # make type checker happy
+                    text.insert(tkinter.END, t[1] + "\n", t[0])
             else:
                 text.insert(tkinter.END, t[0] + "\n")
 
@@ -66,9 +67,9 @@ class HelpDialog(tkinter.Toplevel):
 
 def show_help() -> None:
     """Display help dialog."""
-    help_text = [
+    help_text : list[tuple[str, Optional[str]]] = [
         ("<h1>", "Road core service configuration editor"),
         ("<h2>", "Main help"),
-        ("help text",),
+        ("help text", None),
     ]
     HelpDialog(None, help_text=help_text)

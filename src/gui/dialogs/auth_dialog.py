@@ -2,8 +2,8 @@
 
 import tkinter
 
-from gui.icons import Icons
 from gui.dialogs.help_dialog import show_help
+from gui.icons import Icons
 
 
 class AuthDialog(tkinter.Toplevel):
