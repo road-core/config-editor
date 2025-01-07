@@ -3,6 +3,7 @@
 import tkinter
 from tkinter import ttk
 
+from gui.dialogs.help_dialog import show_help
 from gui.icons import Icons
 
 
@@ -56,11 +57,21 @@ class ConversationCacheDialog(tkinter.Toplevel):
             image=self.icons.checkbox_icon,
             width=200,
         )
+        ok_button.grid(row=2, column=1, sticky="W", padx=10, pady=10)
+
+        help_button = tkinter.Button(
+            self,
+            text="Help",
+            command=self.help,
+            compound="left",
+            image=self.icons.help_faq_icon,
+            width=200,
+        )
+        help_button.grid(row=2, column=2, sticky="W", padx=10, pady=10)
 
         # UI groups placement
         self.uigroup.grid(row=1, column=1, sticky="NSWE", padx=5, pady=5)
 
-        ok_button.grid(row=2, column=1, sticky="W", padx=10, pady=10)
 
         # get the focus
         ok_button.focus_set()
@@ -68,3 +79,7 @@ class ConversationCacheDialog(tkinter.Toplevel):
     def ok(self) -> None:
         """Handle Ok button press."""
         self.destroy()
+
+    def help(self) -> None:
+        """Handle Help button press."""
+        show_help()
