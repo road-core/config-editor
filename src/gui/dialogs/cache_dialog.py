@@ -72,7 +72,6 @@ class ConversationCacheDialog(tkinter.Toplevel):
         # UI groups placement
         self.uigroup.grid(row=1, column=1, sticky="NSWE", padx=5, pady=5)
 
-
         # get the focus
         ok_button.focus_set()
 
