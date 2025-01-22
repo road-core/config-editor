@@ -73,3 +73,13 @@ def show_help() -> None:
         ("help text", None),
     ]
     HelpDialog(None, help_text=help_text)
+
+
+def show_help_for_auth_dialog() -> None:
+    """Display help for auth dialog."""
+    help_text: list[tuple[str, Optional[str]]] = [
+        ("<h1>", "Road core service configuration editor"),
+        ("<h2>", "Authentication configuration dialog"),
+        ("help text", None),
+    ]
+    HelpDialog(None, help_text=help_text)
