@@ -2,7 +2,7 @@
 
 import tkinter
 
-from gui.dialogs.help_dialog import show_help
+from gui.dialogs.help_dialog import show_help_for_data_collection_dialog
 from gui.icons import Icons
 
 
@@ -54,4 +54,4 @@ class DataCollectionDialog(tkinter.Toplevel):
 
     def help(self) -> None:
         """Handle Help button press."""
-        show_help()
+        show_help_for_data_collection_dialog()
