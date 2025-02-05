@@ -93,3 +93,13 @@ def show_help_for_cache_dialog() -> None:
         ("help text", None),
     ]
     HelpDialog(None, help_text=help_text)
+
+
+def show_help_for_configuration_dialog() -> None:
+    """Display help for configuration dialog."""
+    help_text: list[tuple[str, Optional[str]]] = [
+        ("<h1>", "Road core service configuration editor"),
+        ("<h2>", "Configuration dialog"),
+        ("help text", None),
+    ]
+    HelpDialog(None, help_text=help_text)
